@@ -99,7 +99,6 @@ $ git help config
 4. 계속 반복
 
 
-출처 : [Pro Gir BOOK](https://git-scm.com/book/ko/v2)
 
 ### 파일 상태 확인
 ```bash
@@ -151,3 +150,6 @@ Staged 면서 동시에 unstaged가 된다.
 	# doc 디렉토리 아래의 모든 .pdf 파일을 무시 
 	doc/**/*.pdf
 	```
+
+
+출처 : [Pro Git BOOK](https://git-scm.com/book/ko/v2)
