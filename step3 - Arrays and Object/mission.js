@@ -4,7 +4,6 @@ const missionData1 = data.mission1;
 const missionData2  = data.mission2;
 
 // 1. 배열 만들기 - 숫자타입으로만 구성된 요소를 뽑아 배열 만들기
-// 나도 함수형 하고 싶다!!! ㅜㅜ
 
 const isNumber = (val) => {
     return typeof val == "number";
@@ -19,23 +18,6 @@ const functionMission1 = Object.values(missionData1).forEach(obj => {
 });
 
 // 2. 배열결과 출력 - type이 sk인, name으로 구성된 배열만 출력해본다.
-
-
-// const flatten = (arr) => {
-//     const stack = [...arr];
-//     const res = [];
-
-//     while (stack.length) {
-//         const next = stack.pop();
-//         if (Array.isArray(next)) {
-//             stack.push(...next);
-//         } else {
-//             res.push(next);
-//         }
-//     }
-
-//     return res.reverse();
-// }
 
 const namesArr = [];
 
@@ -56,11 +38,9 @@ const checkAndInsert = (type, name) => {
     } 
 }
 
-// 재귀
 const findObj = (arr) => arr.forEach(obj => {
     checkAndInsert(obj.type, obj.name, namesArr)
     if (obj.childnode) findObj(obj.childnode);
 });
 
 const functionMission2 = findObj(missionData2);
-console.log(namesArr);
