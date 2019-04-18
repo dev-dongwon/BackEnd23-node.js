@@ -53,19 +53,21 @@ const initData = (todos) => {
 };
 
 const show = (todosType) => {
-    if (todosType === "all") console.log(` todo : ${dataObj.todo.length}, doing : ${dataObj.doing.length}, done : ${dataObj.todo.length}`);
-    else if (Object.keys(dataObj).includes(todosType)) {
+    if (todosType === "all")
+        console.log(` todo : ${dataObj.todo.length}개, doing : ${dataObj.doing.length}개, done : ${dataObj.todo.length}개`);
+    
+    else if (Object.keys(dataObj).includes(todosType))
         Object.keys(dataObj).forEach((val) => {
             if (val === todosType) {
                 console.log(`todo리스트 :  총 ${dataObj[todosType].length} : ${dataObj[todosType].join()}`);
             };
         })
-    } else {
+    
+    else 
         throw new Error("데이터 형식이 일치하지 않습니다");
-    }
 }
 
 
 initData(todos);
 console.log(dataObj);
-console.log(show("todo"));
+console.log(show("all"));
