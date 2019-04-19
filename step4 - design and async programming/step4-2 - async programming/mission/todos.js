@@ -93,11 +93,9 @@ const show = (todosType) => {
     }
 };
 
-show("all");	// 1/1/1
-addData('snow', ['snow']);	// 2/1/1
-updateData(312323, 'done');	// 2/0/2
-deleteData(312323);			// 2/0/1
-
 module.exports = {
-    show
+    show,
+	"add" : addData,
+	"update" : updateData,
+	"delete" : deleteData,
 };
