@@ -1,42 +1,77 @@
-const todosData = require('./todosData');
-const data = todosData.data;
+//todos.js
+const originData = require('./todoList.json');
+const convertedData = JSON.parse(JSON.stringify(originData)).data;
 
-const getTodosList = (() => {
-    const dataTemplate = {"todo" :[], "doing": [], "done":[]};
-    return () => dataTemplate;
-})();
+const status = ['todo', 'doing', 'done'];
+const idGenerator = () => Math.floor(Math.random() * (99999)) + 1;
 
-const initData = (data) => {
+const addDataToObject = (name, tags)=> { 
+    let obj = {
+        name,
+        tags,
+        status: 'todo',
+        id: idGenerator()
+    };
+    convertedData.push(obj);
+ };
+
+const updateDataToObject = ()=> {  };
+
+const deleteDataToObject = ()=> {  };
+
+const loadData = (data) => {
+    
+    
+    const statusObject = {
+        "todo" :[],
+        "doing" : [],
+        "done" :[]
+    };
+    
+
+    const makInitObj = (obj) => {
+        let data = {
+            name : obj.name,
+            id : obj.id
+        };
+        statusObject[obj.status].push(data);
+    };
+	
     data.forEach((obj) => {
-        if (obj.status === "todo") getTodosList().todo.push(obj.name);
-        if (obj.status === "doing") getTodosList().doing.push(obj.name);
-        if (obj.status === "done") getTodosList().done.push(obj.name);
-    })
-}
-
-const isValidType = (todosType) => {
-    let result = false;
-
-    Object.keys(getTodosList()).forEach((key) => {
-        if (key == todosType) {
-            result = true;
+        if (obj.status === "todo") {
+            makInitObj(obj);
+        } else if (obj.status === "doing") {
+            makInitObj(obj);
+        } else if (obj.status === "done") {
+            makInitObj(obj);
         }
-    })
-    return result;
-}
+    });
+};
 
 const show = (todosType) => {
+	loadData(convertedData);
     if (todosType === 'all') {
-        console.log(` todo : ${getTodosList().todo.length}개, doing : ${getTodosList().doing.length}개, done : ${getTodosList().todo.length}개`)
-    } else if (isValidType(todosType)) {
-        console.log(`${todosType}리스트 :  총 ${getTodosList()[todosType].length} : ${getTodosList()[todosType].join()}`);
-    }
-}
+        console.log(`todo : ${statusObject.todo.length}개, doing : ${statusObject.doing.length}개, done : ${statusObject.todo.length}개`);
+    } else if (status.includes(todosType)) {
+        let listByStatus = statusObject[todosType];
+        let nameListOfStatus = listByStatus.reduce((init, value) => {
+            init.push(`'${value.name}, ${value.id}번'`);
+            return init;
+        },[]);
+        
 
-initData(data);
+        console.log(`${todosType}리스트 :  총 ${listByStatus.length} : ${nameListOfStatus.join(', ')}`);
+    }
+};
+
+loadData(convertedData);
+show('todo');
+addDataToObject('snow', ['snow']);
+show('todo');
+
 
 module.exports = {
-    getTodoList : getTodosList(),
+    getTodoList : statusObject,
     show,
 
-}
+};

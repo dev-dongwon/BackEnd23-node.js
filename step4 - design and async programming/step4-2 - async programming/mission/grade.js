@@ -1,66 +1,93 @@
-const todos = require('./todos');
+const Todos = require('./todos');
 
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
+const readline = require('readline');
+const rl = readline.createInterface(process.stdin,process.stdout);
+
+rl.setPrompt('명령하세요: ');
+rl.prompt();
+rl.on('line', (userInput) => {
+    switch(userInput.toLowerCase().trim()){
+        case 'exit':
+            rl.close();
+            break;
+        default:
+            console.log(`당신의 명령어: ${userInput}`);
+            break;
+    }
+    rl.prompt();
+}).on('close', () => {
+    console.log("프로그램을 종료합니다.");
+    process.exit();
 });
 
 
-const regexp = () => {
-    // [1번째 command, 2번째 command]
-    const regexpForPrimaryCommand = /[^\$]+(?=\$)/g;
-    // [2번째 command, 3번째 command]
-    const regexpForSecondaryCommand = /(?<=\$)[^\$]+/g;
-    const regexpObj = {regexpForPrimaryCommand, regexpForSecondaryCommand};
+
+
+
+
+
+// const todos = require('./todos');
+
+// const readline = require('readline').createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+// });
+
+// const regexp = () => {
+//     // [1번째 command, 2번째 command]
+//     const regexpForPrimaryCommand = /[^\$]+(?=\$)/g;
+//     // [2번째 command, 3번째 command]
+//     const regexpForSecondaryCommand = /(?<=\$)[^\$]+/g;
+//     const regexpObj = {regexpForPrimaryCommand, regexpForSecondaryCommand};
     
-    return regexpObj;
-}
+//     return regexpObj;
+// }
 
-const getSeperateCommandArray = (command) => {
-    let commandArray = [];
+// const getSeperateCommandArray = (command) => {
+//     let commandArray = [];
     
-    const firstCommand = command.match(regexp().regexpForPrimaryCommand)[0];
-    const secondCommand = command.match(regexp().regexpForSecondaryCommand)[0];
-    const thirdCommand = command.match(regexp().regexpForSecondaryCommand)[1];
+//     const firstCommand = command.match(regexp().regexpForPrimaryCommand)[0];
+//     const secondCommand = command.match(regexp().regexpForSecondaryCommand)[0];
+//     const thirdCommand = command.match(regexp().regexpForSecondaryCommand)[1];
 
-    commandArray = [firstCommand, secondCommand];
+//     commandArray = [firstCommand, secondCommand];
 
-    if (thirdCommand) {
-        commandArray.push(thirdCommand);
-    }
-    return commandArray;
-}
+//     if (thirdCommand) {
+//         commandArray.push(thirdCommand);
+//     }
+//     return commandArray;
+// }
 
 
-const executeTodoMethod = (firstCommand, secondCommand, thirdCommand) => {
-    todos[firstCommand](secondCommand, thirdCommand);
-}
+// const executeTodoMethod = (firstCommand, secondCommand, thirdCommand) => {
+//     todos[firstCommand](secondCommand, thirdCommand);
+// }
 
-const runTodoProgram = () => {
+// const runTodoProgram = () => {
 
-    readline.setPrompt('명령을 입력하세요 : ');
-    readline.on('line', (command) => {
-        try {
-            const seperateCommandArray = getSeperateCommandArray(command, runTodoProgram);
+//     readline.setPrompt('명령을 입력하세요 : ');
+//     readline.on('line', (command) => {
+//         try {
+//             const seperateCommandArray = getSeperateCommandArray(command, runTodoProgram);
             
-            if (seperateCommandArray.length == 2) {
+//             if (seperateCommandArray.length == 2) {
                 
-                executeTodoMethod(seperateCommandArray[0], seperateCommandArray[1]);
+//                 executeTodoMethod(seperateCommandArray[0], seperateCommandArray[1]);
                 
-                setTimeout(() => {
-                    todos.show("all");
-                }, 1000);
+//                 setTimeout(() => {
+//                     todos.show("all");
+//                 }, 1000);
 
-            } else {
-                executeFunc(seperateCommandArray[0], seperateCommandArray[1], seperateCommandArray[2]);
-            }
+//             } else {
+//                 executeFunc(seperateCommandArray[0], seperateCommandArray[1], seperateCommandArray[2]);
+//             }
             
-        } catch (error) {
-            console.log("올바르지 않은 명령어입니다, 다시 입력해주세요")
-            runTodoProgram();
-        }
-    });
-}
+//         } catch (error) {
+//             console.log("올바르지 않은 명령어입니다, 다시 입력해주세요")
+//             runTodoProgram();
+//         }
+//     });
+// }
 
 
-runTodoProgram();
+// runTodoProgram();
