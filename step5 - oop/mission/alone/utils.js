@@ -1,4 +1,4 @@
-const Utils = () => {};
+const Utils = function() {};
 
 const instructorUtils = {
 
@@ -22,6 +22,15 @@ const commonUtils = {
             return acc;
         }, []);
     },
+    
+    isDuplicated : (val, key, objArr) => {
+        let result = false;
+        objArr.forEach((element) => {
+            if (val === element[key]) result = true;
+        })
+        return result;
+    }
+
 }
 
 Utils.prototype = {
