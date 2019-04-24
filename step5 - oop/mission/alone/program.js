@@ -3,18 +3,27 @@ const readline = require('readline').createInterface({
     output: process.stdout
 });
 
-const Program = (readline) =>{
-    this.readline = readline;   
-}
+const Decoder = require('./decoder.js');
 
-Program.prototype.runProgram = (readline, decoder) => {
-    readline.setPrompt('명령하세요: ');
-    readline.prompt();
-    readline.on('line', (userInput) => {    
-        decoder(userInput);
-    }).on('close', () => {
-        console.log("프로그램을 종료합니다.");
-        process.exit();
-    });
+function Program () {
+    this.decoder = new Decoder();
 };
 
+Program.prototype = {
+
+    runProgram : (readline, decoder) => {
+        readline.setPrompt('명령하세요: ');
+        readline.prompt();
+        readline.on('line', (userInput) => {
+            console.log(decoder.__proto__.getCmdList(userInput, decoder.regexpList.seperateUserinput))
+        }).on('close', () => {
+            console.log("프로그램을 종료합니다.");
+            process.exit();
+        });
+    }
+}
+
+const run = (() => {
+    const program = new Program();
+    program.runProgram(readline, program.decoder);
+})();
