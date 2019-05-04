@@ -41,4 +41,14 @@ const ArrayParser = class {
 
         return lexicalObjArr;
     }
+
+    parser() {
+        this.lexer().forEach((obj) => {
+            this.parseTree.insert(obj, this.stack);
+        });
+
+        if (!this.stack.isEmpty()) throw new Error('올바른 데이터 형식이 아닙니다 (시작 괄호가 더 많습니다)');
+
+        return this.parseTree;
+    }
 }
