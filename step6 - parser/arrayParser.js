@@ -52,3 +52,9 @@ const ArrayParser = class {
         return this.parseTree;
     }
 }
+
+
+
+const str = '[1, [123, [234]], 123, [2]]'
+const arrayParser = new ArrayParser(str);
+console.log(JSON.stringify(arrayParser.parser(), null, 4));
