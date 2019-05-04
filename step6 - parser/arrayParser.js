@@ -29,4 +29,16 @@ const ArrayParser = class {
 
         return tokenArr;
     }
+
+    lexer() {
+        const lexicalObjArr = this.tokenizer().filter((char) => !parserutils.isType(char, parserutils.dataType.seperator))
+        .reduce((acc, token) => {
+                let tokenObj = {};
+                [tokenObj.type, tokenObj.value] = [parserutils.getDataType(token), token];
+                acc.push(tokenObj);
+                return acc;
+            }, [])
+
+        return lexicalObjArr;
+    }
 }
