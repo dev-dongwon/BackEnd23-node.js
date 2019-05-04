@@ -21,3 +21,6 @@
 #### STEP 5
 - 5-1 : OOP in javascript
 - 5-2 : STEP4에서 만든 프로그램을 다시 OOP로 만들어보기
+
+#### STEP 6
+- 6-1 : 배열 구조를 분석하는 ArrayParser 
