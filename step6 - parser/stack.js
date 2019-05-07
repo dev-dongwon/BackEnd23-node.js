@@ -20,9 +20,10 @@ const Stack = class {
     }
 
     isEmpty() {
-        if (this.stack.length > 0) {
+        if (this.stack.length === 0) {
+            return true
+        }
             return false;
-        } else return true;
     }
 }
 
