@@ -5,15 +5,16 @@ const ArrayParser = class {
 
     tokenizer() {
 
-        const charArr = this.str.split("").filter((char) => !parserutils.isType(char, parserutils.dataType.whitespace));
+        const charArr = this.str.split("").filter((char) => char != " ");
+
         const tokenArr = charArr.reduce((acc, val, index) => {
             
             let numberCount = 0;
             
-            if (parserutils.isType(val, parserutils.dataType.number)) {
+            if (parserutils.isType(val, parserutils.charType.number)) {
                 let [numberElement, idx] = [``, index];
 
-                while (parserutils.isType(charArr[idx], parserutils.dataType.number)) {
+                while (parserutils.isType(charArr[idx], parserutils.charType.number)) {
                     [numberElement, idx, numberCount] = [numberElement+charArr[idx], idx+1, numberCount+1]
                 }
                 acc.push(numberElement);
@@ -24,17 +25,16 @@ const ArrayParser = class {
 
             charArr.splice(index, numberCount-1);
             return acc;
-
         }, []);
 
         return tokenArr;
     }
 
     lexer() {
-        const lexicalObjArr = this.tokenizer().filter((char) => !parserutils.isType(char, parserutils.dataType.seperator))
+        const lexicalObjArr = this.tokenizer().filter((char) => !parserutils.isType(char, parserutils.charType.seperator))
         .reduce((acc, token) => {
                 let tokenObj = {};
-                [tokenObj.type, tokenObj.value] = [parserutils.getDataType(token), token];
+                [tokenObj.type, tokenObj.value] = [parserutils.getType(token), token];
                 acc.push(tokenObj);
                 return acc;
             }, [])
