@@ -4,7 +4,10 @@ const ArrayParser = class {
     }
 
     tokenizer() {
-        return this.string.split("").filter((val) => val !== " ");
+        const tokenArr = [];
+
+        this.string.split("").filter((val) => val !== " ")
+        
     }
 }
 
