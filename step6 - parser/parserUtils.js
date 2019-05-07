@@ -4,7 +4,6 @@ const parserUtils = {
         startArray : 'array',
         endArray : 'endArray',
         seperator : 'seperator',
-        whitespace : 'whitespace'
     },
 
     getCharType(token) {
@@ -14,7 +13,6 @@ const parserUtils = {
             startArray : /[\[]/,
             endArray : /[\]]/,
             seperator : /[,]+/,
-            whitespace : /\s+/,
         };
 
         let charType;
