@@ -1,5 +1,5 @@
 const parserUtils = {
-    dataType : {
+    charType : {
         number : 'number',
         startArray : 'array',
         endArray : 'endArray',
@@ -7,27 +7,29 @@ const parserUtils = {
         whitespace : 'whitespace'
     },
 
-    getDataType(token) {
+    getCharType(token) {
 
         typeRegexp = {
-            number : /\d/g,
-            startArray : /[\[]/g,
-            endArray : /[\]]/g,
-            seperator : /[,]+/g,
-            whitespace : /\s+/g,
+            number : /\d/,
+            startArray : /[\[]/,
+            endArray : /[\]]/,
+            seperator : /[,]+/,
+            whitespace : /\s+/,
         };
 
-        let dataType;
+        let charType;
 
         Object.keys(typeRegexp).forEach((key) => {
-            if (typeRegexp[key].test(token)) dataType = this.dataType[key];
+            if (typeRegexp[key].test(token)) {
+                charType = this.charType[key];
+            }
         })
 
-        return dataType;
+        return charType;
     },
 
     isType(char, type) {
-        const charType = this.getDataType(char);
+        const charType = this.getCharType(char);
         return charType === type
     }
 }
