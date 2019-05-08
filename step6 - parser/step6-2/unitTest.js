@@ -25,7 +25,7 @@ const ArrayParserTest = () => {
         ]
 
         testCases.forEach((testCase, index) => {
-            test.assertArrayEquals(testCases[index], expectedCases[index], tokenizerTest)
+            test.assertArrayEquals(testCase, expectedCases[index], tokenizerTest)
         })
     }
 
