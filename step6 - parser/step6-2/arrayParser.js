@@ -14,7 +14,6 @@ const ArrayParser = class {
     }
 
     tokenizer() {
-
         let token = ``;
         const tokenArr = [];
         const quoteStack = new Stack();
@@ -61,7 +60,7 @@ const ArrayParser = class {
     lexer() {
         const lexicalObjArr = this.tokenizer().reduce((acc, token) => {
             let tokenObj = {};
-            [tokenObj.type, tokenObj.value] = [utils.getDataType(token), token];
+            [tokenObj.type, tokenObj.value, tokenObj.child] = [utils.getDataType(token), token, []];
             acc.push(tokenObj);
             return acc;
         }, [])
