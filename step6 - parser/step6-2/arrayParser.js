@@ -58,6 +58,16 @@ const ArrayParser = class {
         return tokenArr;
     }
 
+    lexer() {
+        const lexicalObjArr = this.tokenizer().reduce((acc, token) => {
+            let tokenObj = {};
+            [tokenObj.type, tokenObj.value] = [utils.getDataType(token), token];
+            acc.push(tokenObj);
+            return acc;
+        }, [])
+         return lexicalObjArr;
+    }
+
 }
 
 module.exports = ArrayParser;
