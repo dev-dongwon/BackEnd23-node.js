@@ -4,21 +4,20 @@ const Stack = require('./stack');
 const ArrayParser = class {
     constructor(string) {
         this.string = string;
-        this.tokenizedArr = this.tokenizer();
+    }
+
+    pushAndResetToken(token, tokenArr) {
+        if (token !== ``) {
+            tokenArr.push(token);
+        }
+        return token = ``;
     }
 
     tokenizer() {
 
+        let token = ``;
         const tokenArr = [];
         const quoteStack = new Stack();
-        let token = ``;
-
-        const pushToken = () => {
-            if (token !== ``) {
-                tokenArr.push(token);
-            }
-            token = ``;
-        }
 
         this.string.split("").forEach((char) => {
             
@@ -27,7 +26,7 @@ const ArrayParser = class {
                     tokenArr.push(char);
                     break;
                 case ']':
-                    pushToken();
+                    token = this.pushAndResetToken(token, tokenArr)
                     tokenArr.push(char);
                     break;
                 case '\'':
@@ -36,12 +35,12 @@ const ArrayParser = class {
                         quoteStack.push(char);
                     } else {
                         quoteStack.pop();
-                        pushToken();
+                        token = this.pushAndResetToken(token, tokenArr)
                     }
                     break;
                 case ',':
                     if (quoteStack.isEmpty()) {
-                        pushToken();
+                        token = this.pushAndResetToken(token, tokenArr);
                     } else {
                         token += char;
                     }
@@ -56,7 +55,6 @@ const ArrayParser = class {
                     break;
             }
         })
-        
         return tokenArr;
     }
 
