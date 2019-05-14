@@ -6,18 +6,12 @@ const ArrayParser = class {
     
     constructor(string) {
         this.string = string;
-    }
-
-    get parsetree() {
-        return new ParseTree({root : null, stack : new Stack()});
-    }
-
-    get charType() {
-        return {
+        this.charType = {
             tokenArr : [',','[',']'],
             bracketArr : ['[', ']'],
             stringArr : ['\'','\"'],
-        }
+        };
+        this.parsetree = new ParseTree({root : null, stack : new Stack()});
     }
 
     pushAndResetToken(token, tokenArr) {
@@ -26,11 +20,11 @@ const ArrayParser = class {
         }
         return token = ``;
     }
-
+    
     isSameQuote(quote, quoteStack) {
         return quote === quoteStack.peek();
     }
-
+    
     pushQuoteStack(quote, quoteStack, stringPropertyArr) {
         if (stringPropertyArr.includes(quote)) {
             if (quoteStack.isEmpty()) {
@@ -51,7 +45,7 @@ const ArrayParser = class {
         }
     }
 
-    makeStringToken(stringPropertyArr, tokenArr, token, char) {
+    makeStringToken (stringPropertyArr, tokenArr, token, char) {
         if (stringPropertyArr.includes(token[0])) {
             if (token[0] === (token[token.length-1])) {
                 token = this.pushAndResetToken(token, tokenArr);
@@ -63,7 +57,7 @@ const ArrayParser = class {
         }
         return token;
     }
-
+    
     tokenizer() {
         let token = ``;
         const tokenArr = [];
