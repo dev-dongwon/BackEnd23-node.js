@@ -24,3 +24,4 @@
 
 #### STEP 6
 - 6-1 : 배열 구조를 분석하는 ArrayParser 
+- 6-2 : ArrayParser Refactoring (데이터 타입 지원)
